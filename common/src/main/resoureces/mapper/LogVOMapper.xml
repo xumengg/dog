@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.xm.common.mapper.LogVOMapper">
+
+
+    <insert id="insert" parameterType="com.github.xm.common.vo.LogVO">
+        insert into sys_log
+        (
+        <include refid="insert_field"/>
+        )
+        values
+        (
+        <include refid="insert_value"/>
+        );
+    </insert>
+
+    <sql id="insert_field">
+        <trim suffixOverrides=",">
+            <if test="serviceId != null and serviceId != ''">
+                service_id,
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by,
+            </if>
+            <if test="remoteAddr != null and remoteAddr != ''">
+                remote_addr,
+            </if>
+            <if test="userAgent != null and userAgent != ''">
+                user_agent,
+            </if>
+            <if test="requestUri != null and requestUri != ''">
+                request_uri,
+            </if>
+            <if test="method != null and method != ''">
+                method,
+            </if>
+            <if test="params != null and params != ''">
+                params,
+            </if>
+            <if test="exception != null and exception != ''">
+                `exception`,
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                del_flag,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="insert_value">
+        <trim suffixOverrides=",">
+            <if test="serviceId != null and serviceId != ''">
+                #{serviceId},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                #{createBy},
+            </if>
+            <if test="remoteAddr != null and remoteAddr != ''">
+                #{remoteAddr},
+            </if>
+            <if test="userAgent != null and userAgent != ''">
+                #{userAgent},
+            </if>
+            <if test="requestUri != null and requestUri != ''">
+                #{requestUri},
+            </if>
+            <if test="method != null and method != ''">
+                #{method},
+            </if>
+            <if test="params != null and params != ''">
+                #{params},
+            </if>
+            <if test="exception != null and exception != ''">
+                #{exception},
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                #{delFlag},
+            </if>
+        </trim>
+    </sql>
+
+
+</mapper>

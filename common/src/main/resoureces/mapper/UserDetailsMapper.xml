@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.xm.common.mapper.UserDetailsMapper">
+
+
+    <!-- userVo结果集 -->
+    <resultMap id="userVoResultMap" type="com.github.xm.common.vo.UserVO">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="phone" property="phone" />
+        <result column="avatar" property="avatar" />
+        <result column="ucreate_time" property="createTime"/>
+        <result column="uupdate_time" property="updateTime"/>
+        <result column="udel_flag" property="delFlag"/>
+        <result column="deptId" property="deptId"/>
+        <result column="deptName" property="deptName"/>
+        <collection property="roleList" ofType="com.github.xm.common.vo.RoleVO">
+            <id column="role_id" property="roleId" />
+            <result column="role_name" property="roleName" />
+            <result column="role_code" property="roleCode" />
+            <result column="role_desc" property="roleDesc" />
+            <result column="rcreate_time" property="createTime" />
+            <result column="rupdate_time" property="updateTime" />
+        </collection>
+    </resultMap>
+
+    <sql id="selectUserVo">
+        SELECT
+            `user`.user_id,
+            `user`.username,
+            `user`.`password`,
+            `user`.salt,
+            `user`.phone,
+            `user`.avatar,
+            `user`.dept_id,
+            `user`.create_time AS ucreate_time,
+            `user`.update_time AS uupdate_time,
+            `user`.del_flag AS udel_flag,
+            `user`.dept_id AS deptId,
+            r.role_id,
+            r.role_name,
+            r.role_code,
+            r.role_desc,
+            r.create_time AS rcreate_time,
+            r.update_time AS rupdate_time
+        FROM
+            sys_user AS `user`
+            LEFT JOIN sys_user_role AS ur ON ur.user_id = `user`.user_id
+            LEFT JOIN sys_role AS r ON r.role_id = ur.role_id
+    </sql>
+
+    <select id="selectUserVoByUsername" resultMap="userVoResultMap">
+        <include refid="selectUserVo"/>
+        WHERE `user`.username = #{username}
+    </select>
+
+    <select id="selectUserVoByPhone" resultMap="userVoResultMap">
+        <include refid="selectUserVo"/>
+        WHERE `user`.phone = #{phone}
+    </select>
+
+    <select id="selectUserVoByUserId" resultMap="userVoResultMap">
+        <include refid="selectUserVo"/>
+        WHERE `user`.user_id = #{userId}
+    </select>
+
+
+    <insert id="insert" parameterType="com.github.xm.common.vo.UserVO" useGeneratedKeys="true" keyProperty="userId">
+        insert into sys_user (`username`,`avatar`) values (#{username},#{avatar});
+    </insert>
+
+
+
+</mapper>
