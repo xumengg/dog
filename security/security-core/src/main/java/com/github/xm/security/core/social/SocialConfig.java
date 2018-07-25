@@ -1,5 +1,6 @@
 package com.github.xm.security.core.social;
 
+import com.github.xm.common.util.UserUtil;
 import com.github.xm.security.core.properties.DogSecurityProperties;
 import com.github.xm.security.core.social.support.DogSpringSocialConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -41,9 +43,6 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    @Autowired
-    private AuthenticationFailureHandler authenticationFailureHandler;
-
     @Override
     @Bean
     @Primary
@@ -71,8 +70,16 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Bean
     public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
         return new ProviderSignInUtils(connectionFactoryLocator,
-                getUsersConnectionRepository(connectionFactoryLocator)) {
-        };
+                getUsersConnectionRepository(connectionFactoryLocator));
     }
 
+    @Override
+    public UserIdSource getUserIdSource() {
+        return new UserIdSource() {
+            @Override
+            public String getUserId() {
+                return UserUtil.currentUser().getUserId();
+            }
+        };
+    }
 }
