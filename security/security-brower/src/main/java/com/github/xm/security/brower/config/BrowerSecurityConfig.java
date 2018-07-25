@@ -2,6 +2,7 @@ package com.github.xm.security.brower.config;
 
 import com.github.xm.common.sender.ILogVOSender;
 import com.github.xm.common.service.impl.UserDetailsServiceImpl;
+import com.github.xm.security.brower.session.DogSessionInformationExpiredStrategy;
 import com.github.xm.security.core.authentication.handler.DogAuthenticationFailureHandler;
 import com.github.xm.security.core.authentication.handler.DogAuthenticationSuccessHandler;
 import com.github.xm.security.brower.filter.ImageValidateCodeFilter;
@@ -96,11 +97,24 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(dogSecurityProperties.getBrower().getRememberMeSeconds())
                 .userDetailsService(userDetailsService)
                 .and()
+                //session相关配置
+                .sessionManagement()
+                //.invalidSessionStrategy(invalidSessionStrategy)
+                .invalidSessionUrl(DogSecurityConstants.SESSION_INVALID_URL)
+                //最大Session数量设置为1 防并发控制
+                .maximumSessions(dogSecurityProperties.getSession().getMaximum())
+                //当session到达最大值 阻止后面的人登陆
+                .maxSessionsPreventsLogin(true)
+                .expiredSessionStrategy(new DogSessionInformationExpiredStrategy())
+                .and()
+                .and()
+                //授权相关配置
                 .authorizeRequests()
                 .antMatchers(DogSecurityConstants.LOGIN_PAGE,
                         dogSecurityProperties.getCode().getSms().getUrl(),
                         dogSecurityProperties.getBrower().getLoginPage(),
-                        dogSecurityProperties.getCode().getCode_permit_url())
+                        dogSecurityProperties.getCode().getCode_permit_url(),
+                        DogSecurityConstants.SESSION_INVALID_URL)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

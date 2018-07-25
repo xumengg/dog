@@ -18,4 +18,5 @@ public class DogSecurityProperties {
 
     private SocialProperties social = new SocialProperties();
 
+    private SessionProperties session=new SessionProperties();
 }

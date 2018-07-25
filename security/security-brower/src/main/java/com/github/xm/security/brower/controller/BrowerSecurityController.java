@@ -11,6 +11,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,4 +50,11 @@ public class BrowerSecurityController {
         }
         return ServerResponse.failure("访问服务需要身份认证，请引导用户到登陆页");
     }
+
+    @GetMapping(DogSecurityConstants.SESSION_INVALID_URL)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ServerResponse<String> sessionInvalid(HttpServletRequest request, HttpServletResponse response){
+        return ServerResponse.failure("session失效，请重新登陆");
+    }
+
 }

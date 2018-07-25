@@ -28,6 +28,11 @@ public interface DogSecurityConstants {
      */
     String LOGIN_PROESSING_URL = "/authentication/form";
 
+    /**
+     * session失效后的响应
+     */
+    String SESSION_INVALID_URL="/session/invalid";
+
     //---------------------------------短信验证码相关-------------------------------------
 
     /**

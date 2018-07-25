@@ -208,4 +208,51 @@ public class UserVO implements SocialUserDetails {
     public void setRoleList(List<RoleVO> roleList) {
         this.roleList = roleList;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        };
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        };
+        UserVO userVO = (UserVO) o;
+        return Objects.equals(userId, userVO.userId) &&
+                Objects.equals(username, userVO.username) &&
+                Objects.equals(password, userVO.password) &&
+                Objects.equals(salt, userVO.salt) &&
+                Objects.equals(createTime, userVO.createTime) &&
+                Objects.equals(updateTime, userVO.updateTime) &&
+                Objects.equals(delFlag, userVO.delFlag) &&
+                Objects.equals(phone, userVO.phone) &&
+                Objects.equals(avatar, userVO.avatar) &&
+                Objects.equals(deptId, userVO.deptId) &&
+                Objects.equals(deptName, userVO.deptName) &&
+                Objects.equals(roleList, userVO.roleList);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(userId, username, password, salt, createTime, updateTime, delFlag, phone, avatar, deptId, deptName, roleList);
+    }
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", delFlag='" + delFlag + '\'' +
+                ", phone='" + phone + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                ", roleList=" + roleList +
+                '}';
+    }
 }
