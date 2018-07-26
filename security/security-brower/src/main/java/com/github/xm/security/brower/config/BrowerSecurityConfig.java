@@ -7,6 +7,7 @@ import com.github.xm.security.core.authentication.handler.DogAuthenticationFailu
 import com.github.xm.security.core.authentication.handler.DogAuthenticationSuccessHandler;
 import com.github.xm.security.brower.filter.ImageValidateCodeFilter;
 import com.github.xm.security.brower.filter.RequestLogFilter;
+import com.github.xm.security.core.authentication.handler.DogLogoutSuccessHandler;
 import com.github.xm.security.core.config.SmsCodeAuthenticationConfig;
 import com.github.xm.security.core.constants.DogSecurityConstants;
 import com.github.xm.security.core.properties.DogSecurityProperties;
@@ -104,9 +105,14 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
                 //最大Session数量设置为1 防并发控制
                 .maximumSessions(dogSecurityProperties.getSession().getMaximum())
                 //当session到达最大值 阻止后面的人登陆
-                .maxSessionsPreventsLogin(true)
+               // .maxSessionsPreventsLogin(true)
                 .expiredSessionStrategy(new DogSessionInformationExpiredStrategy())
                 .and()
+                .and()
+                //退出相关配置
+                .logout()
+                .logoutUrl(DogSecurityConstants.LOGOUT_URL)
+                .logoutSuccessHandler(new DogLogoutSuccessHandler())
                 .and()
                 //授权相关配置
                 .authorizeRequests()
@@ -114,7 +120,8 @@ public class BrowerSecurityConfig extends WebSecurityConfigurerAdapter {
                         dogSecurityProperties.getCode().getSms().getUrl(),
                         dogSecurityProperties.getBrower().getLoginPage(),
                         dogSecurityProperties.getCode().getCode_permit_url(),
-                        DogSecurityConstants.SESSION_INVALID_URL)
+                        DogSecurityConstants.SESSION_INVALID_URL,
+                        DogSecurityConstants.LOGOUT_URL)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

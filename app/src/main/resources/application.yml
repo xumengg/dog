@@ -1,7 +1,6 @@
 server:
   port: 8080
   session:
-    #session 失效时间 单位是秒 ,实际session失效时间不能低于一分钟
     timeout: 3600
 
 spring:
@@ -14,3 +13,5 @@ spring:
       maximum-pool-size: 50
       connection-timeout: 3000
       validation-timeout: 3000
+  session:
+    store-type: redis

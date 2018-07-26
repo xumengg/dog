@@ -33,6 +33,11 @@ public interface DogSecurityConstants {
      */
     String SESSION_INVALID_URL="/session/invalid";
 
+    /**
+     * 退出登陆url
+     */
+    String LOGOUT_URL = "/logout";
+
     //---------------------------------短信验证码相关-------------------------------------
 
     /**
