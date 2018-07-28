@@ -16,11 +16,11 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.github.xm</groupId>
-            <artifactId>security-brower</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.xm</groupId>-->
+            <!--<artifactId>security-brower</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.github.xm</groupId>
@@ -29,11 +29,11 @@
         </dependency>
 
 
-        <!--<dependency>-->
-            <!--<groupId>com.github.xm</groupId>-->
-            <!--<artifactId>security-app</artifactId>-->
-            <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.github.xm</groupId>
+            <artifactId>security-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 

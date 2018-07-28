@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.xm.common.mapper.SysClientMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.xm.common.entity.SysClient">
+        <id column="client_id" property="clientId" />
+        <result column="client_uid" property="clientUid" />
+        <result column="client_secret" property="clientSecret" />
+        <result column="client_type" property="clientType" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        client_id AS clientId, client_uid AS clientUid, client_secret AS clientSecret, client_type AS clientType, del_flag AS delFlag, create_time AS createTime, update_time AS updateTime
+    </sql>
+
+</mapper>
