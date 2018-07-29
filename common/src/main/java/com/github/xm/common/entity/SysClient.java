@@ -114,7 +114,7 @@ public class SysClient extends Model<SysClient> implements ClientDetails {
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return CollUtil.newHashSet("password");
+        return CollUtil.newHashSet("refresh_token");
     }
 
     @Override

@@ -1,18 +1,25 @@
 package com.github.xm.security.app.config;
 
+import com.github.xm.common.service.impl.UserDetailsServiceImpl;
 import com.github.xm.security.app.authentication.handler.DogAuthenticationSuccessHandler;
 import com.github.xm.security.core.authentication.handler.DogAuthenticationFailureHandler;
 import com.github.xm.security.core.config.SmsCodeAuthenticationConfig;
 import com.github.xm.security.core.constants.DogSecurityConstants;
 import com.github.xm.security.core.properties.DogSecurityProperties;
+import com.github.xm.security.core.validate.code.filter.SmsValidateCodeFilter;
 import com.xiaoleilu.hutool.codec.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
+
+import javax.servlet.ServletException;
 
 /**
  * @author: XuMeng
@@ -41,12 +48,20 @@ public class DogAuthenticationResourceServerConfig  extends ResourceServerConfig
     @Autowired
     private SpringSocialConfigurer socialConfigurer;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         //请求日志过滤器
         http
                 //图片验证码过滤器
               //  .addFilterBefore(imageValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
+                //短信验证码过滤器
+                .addFilterBefore(smsValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
                 //表单登陆配置
                 .formLogin()
                 .loginPage(DogSecurityConstants.LOGIN_PAGE)
@@ -75,10 +90,20 @@ public class DogAuthenticationResourceServerConfig  extends ResourceServerConfig
                 .apply(socialConfigurer);
     }
 
-
-    public static void main(String[] args) {
-        String a = "fa651479-53ab-4311-abe3-f92f7891d805:502f1496-5885-4ecd-b38c-6d16f59ddfa6";
-        String encode = Base64.encode(a);
-        System.out.println(encode);
+    /**
+     * 短信验证码过滤器
+     *
+     * @return
+     * @throws ServletException
+     */
+    private SmsValidateCodeFilter smsValidateCodeFilter() throws ServletException {
+        SmsValidateCodeFilter smsValidateCodeFilter = new SmsValidateCodeFilter();
+        smsValidateCodeFilter.setAuthenticationFailureHandler(dogAuthenticationFailureHandler);
+        smsValidateCodeFilter.setRedisTemplate(redisTemplate);
+        smsValidateCodeFilter.setSecurityProperties(dogSecurityProperties);
+        smsValidateCodeFilter.setUserDetailsService((UserDetailsServiceImpl) userDetailsService);
+        smsValidateCodeFilter.initFilterBean();
+        return smsValidateCodeFilter;
     }
+
 }
