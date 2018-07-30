@@ -8,4 +8,5 @@ dog 旨在构建一个单体应用的快速开发平台，采用springboot+mybat
 用户名:徐猛
 密码:123456
 
-新增加集成spring-oauth2实现以token的方式进行认证
+dev分支 
+  新增加集成spring-oauth2实现以token的方式进行认证
