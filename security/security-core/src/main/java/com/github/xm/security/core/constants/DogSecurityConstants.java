@@ -104,4 +104,8 @@ public interface DogSecurityConstants {
     String DEFAULT_IMAGE_FONT_SIZE = "30";
 
 
+    /**
+     * jwt 签名 主要是为了防止token被篡改
+     */
+    String SIGNING_KEY = "dog";
 }
