@@ -10,11 +10,13 @@ import java.io.Serializable;
  * @description:
  **/
 @Data
-public class dkConsumer implements Serializable {
+public class DkConsumer implements Serializable {
 
     private static final long serialVersionUID = 3753103603936801367L;
 
     private String name;
 
     private String wxNickName;
+
+    private String qqNickName;
 }
