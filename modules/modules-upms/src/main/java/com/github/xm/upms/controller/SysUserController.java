@@ -40,8 +40,8 @@ public class SysUserController extends BaseController {
     }
 
     @RequestMapping("/userPage")
-    public Page<UserVO> userPage(@RequestParam Map params, UserVO userVO){
-        return userService.selectUserVOPage(new Query(params),userVO);
+    public Page<UserVO> userPage(@RequestParam Map params){
+        return userService.selectUserVOPage(new Query(params));
     }
 
     @GetMapping("/me")

@@ -1,6 +1,7 @@
 package com.github.xm.upms.mapper;
 
 import com.github.xm.common.util.DataScope;
+import com.github.xm.common.util.Query;
 import com.github.xm.common.vo.UserVO;
 import com.github.xm.upms.entity.SysUser;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -19,6 +20,6 @@ import java.util.Map;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
-    List selectUserVOPageScope(@Param("p") Map params, UserVO userVO, DataScope dataScope);
+    List selectUserVOPageScope(Query query,@Param("p") Map params,DataScope dataScope);
 
 }

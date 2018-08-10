@@ -19,8 +19,7 @@ public interface ISysUserService extends IService<SysUser> {
     /**
      * 分页查询用户列表
      * @param query
-     * @param userVO
      * @return
      */
-    Page<UserVO> selectUserVOPage(Query query,UserVO userVO);
+    Page<UserVO> selectUserVOPage(Query query);
 }

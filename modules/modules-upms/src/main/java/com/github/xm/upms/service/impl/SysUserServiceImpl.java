@@ -32,12 +32,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private ISysDeptService deptService;
 
     @Override
-    public Page<UserVO> selectUserVOPage(Query query, UserVO userVO) {
+    public Page<UserVO> selectUserVOPage(Query query) {
         DataScope dataScope=new DataScope();
         dataScope.setScopeName("dept_id");
         Integer deptId = UserUtil.currentUserDeptId();
         dataScope.setScopes(deptService.getChildren(deptId));
-        return query.setRecords(sysUserMapper.selectUserVOPageScope(query.getCondition(),userVO,dataScope)) ;
+        return query.setRecords(sysUserMapper.selectUserVOPageScope(query,query.getCondition(),dataScope)) ;
     }
 
 }
