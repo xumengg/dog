@@ -10,8 +10,11 @@ import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author: XuMeng
@@ -28,14 +31,20 @@ public class SmsCodeAuthenticationConfig extends SecurityConfigurerAdapter<Defau
     private DogAuthenticationFailureHandler dogAuthenticationFailureHandler;
 
     @Autowired
-    private DogAuthenticationSuccessHandler dogAuthenticationSuccessHandler;
+    private Map<String,AuthenticationSuccessHandler> authenticationSuccessHandlerMap;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
         SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
         smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(dogAuthenticationSuccessHandler);
+
+        /**
+         * 获取的是App成功登陆处理器
+         */
+        AuthenticationSuccessHandler dogAuthenticationSuccessHandler2 = authenticationSuccessHandlerMap.get("dogAuthenticationSuccessHandler2");
+
+        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(dogAuthenticationSuccessHandler2);
         smsCodeAuthenticationFilter.setAuthenticationFailureHandler(dogAuthenticationFailureHandler);
 
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();

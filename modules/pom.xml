@@ -14,6 +14,8 @@
 
     <modules>
         <module>modules-upms</module>
+        <module>modules-link</module>
+        <module>modules-dk</module>
     </modules>
 
     <dependencies>

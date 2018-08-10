@@ -1,9 +1,9 @@
-package com.github.xm.security.brower.controller;
+package com.github.xm.security.core.controller;
 
 import com.baomidou.mybatisplus.toolkit.IOUtils;
-import com.github.xm.security.core.constants.DogSecurityConstants;
 import com.github.xm.common.util.Assert;
-import com.github.xm.security.brower.sender.SmsCodeSender;
+import com.github.xm.security.core.constants.DogSecurityConstants;
+import com.github.xm.security.core.sender.SmsCodeSender;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

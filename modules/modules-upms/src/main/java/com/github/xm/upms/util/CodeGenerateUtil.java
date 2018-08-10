@@ -18,7 +18,7 @@ import java.util.List;
  **/
 public class CodeGenerateUtil {
     public static void main(String[] args) {
-        String outputDir = "C:\\code\\dog\\modules\\modules-upms\\src\\main\\java";
+        String outputDir = "C:\\code\\dog\\common\\src\\main\\java";
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -49,12 +49,12 @@ public class CodeGenerateUtil {
         strategy.setSuperControllerClass("com.github.xm.common.controller.BaseController");
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setInclude(new String[]{"sys_log"});
+        strategy.setInclude(new String[]{"sys_client"});
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.github.xm.upms");
+        pc.setParent("com.github.xm.common");
         pc.setController("controller");
         mpg.setPackageInfo(pc);
 

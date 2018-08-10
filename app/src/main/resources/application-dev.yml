@@ -28,6 +28,8 @@ dog:
         app-id: 100550231
         app-secret: 69b6ab57b22f3c2fe6a6149274e3295e
         provider-id: callback.do
+    oauth2:
+      token-store: jwt
 logging:
   level:
    com.github.xm.common.mapper: debug

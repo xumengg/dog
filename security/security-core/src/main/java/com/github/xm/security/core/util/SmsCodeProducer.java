@@ -1,4 +1,4 @@
-package com.github.xm.security.brower.util;
+package com.github.xm.security.core.util;
 
 import com.google.code.kaptcha.Producer;
 import com.xiaoleilu.hutool.util.RandomUtil;

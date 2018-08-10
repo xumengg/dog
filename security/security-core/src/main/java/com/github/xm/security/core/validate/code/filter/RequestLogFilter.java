@@ -1,4 +1,4 @@
-package com.github.xm.security.brower.filter;
+package com.github.xm.security.core.validate.code.filter;
 
 import com.github.xm.common.sender.ILogVOSender;
 import com.github.xm.common.util.UserUtil;
