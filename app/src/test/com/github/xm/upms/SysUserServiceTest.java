@@ -112,7 +112,7 @@ public class SysUserServiceTest {
     public  void selectUserVOPageTest(){
         Map params=new HashMap();
         Query query=new Query(params);
-        Page<UserVO> userVOPage = sysUserService.selectUserVOPage(query, new UserVO());
+        Page<UserVO> userVOPage = sysUserService.selectUserVOPage(query);
         FormatJson.printConsole(userVOPage);
     }
 }
