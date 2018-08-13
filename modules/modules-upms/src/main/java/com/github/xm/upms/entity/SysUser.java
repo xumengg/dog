@@ -1,5 +1,6 @@
 package com.github.xm.upms.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -57,6 +58,7 @@ public class SysUser extends Model<SysUser> {
     /**
      * 0:正常 1:删除 9:锁定
      */
+    @TableLogic
     @TableField("del_flag")
     private String delFlag;
     /**

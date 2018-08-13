@@ -1,7 +1,7 @@
-package com.github.xm.security.brower.sender.impl;
+package com.github.xm.security.core.sender.impl;
 
 import com.github.xm.common.constants.MQQueueConstants;
-import com.github.xm.security.brower.sender.SmsCodeSender;
+import com.github.xm.security.core.sender.SmsCodeSender;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

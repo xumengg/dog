@@ -1,4 +1,4 @@
-package com.github.xm.security.brower.sender;
+package com.github.xm.security.core.sender;
 
 /**
  * @author: XuMeng

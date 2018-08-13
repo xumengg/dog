@@ -14,6 +14,7 @@ import com.github.xm.upms.service.impl.SysDeptServiceImpl;
 import com.github.xm.upms.service.impl.SysRoleServiceImpl;
 import com.github.xm.upms.service.impl.SysUserRoleServiceImpl;
 import com.github.xm.upms.service.impl.SysUserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.util.Map;
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class SysUserServiceTest {
 
     @Autowired
@@ -61,12 +63,16 @@ public class SysUserServiceTest {
     //@Transactional
     public void insertUserTest(){
         SysUser sysUser=new SysUser();
-        sysUser.setUsername("张三");
-        sysUser.setPhone("13871879517");
+        sysUser.setUsername("李四");
+        sysUser.setPhone("15927325469");
         String password="123456";
         sysUser.setDeptId(2);
         sysUser.setPassword(passwordEncoder.encode(password));
-        sysUserService.insert(sysUser);
+        boolean success = sysUserService.insert(sysUser);
+        if(success){
+            log.info("用户添加成功!");
+        }
+
     }
 
 
@@ -112,7 +118,23 @@ public class SysUserServiceTest {
     public  void selectUserVOPageTest(){
         Map params=new HashMap();
         Query query=new Query(params);
-        Page<UserVO> userVOPage = sysUserService.selectUserVOPage(query, new UserVO());
+        Page<UserVO> userVOPage = sysUserService.selectUserVOPage(query);
         FormatJson.printConsole(userVOPage);
+    }
+
+
+    @Test
+    public void selectUserPageTest(){
+        Page<SysUser> sysUserPage = sysUserService.selectPage(new Query<SysUser>());
+        FormatJson.printConsole(sysUserPage);
+    }
+
+
+    @Test
+    public void deleteUserTest(){
+        boolean success = sysUserService.deleteById(4);
+        if(success){
+            log.info("【张三】用户被删除了！");
+        }
     }
 }

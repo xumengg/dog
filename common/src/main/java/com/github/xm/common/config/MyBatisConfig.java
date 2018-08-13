@@ -3,8 +3,10 @@ package com.github.xm.common.config;
 import com.baomidou.mybatisplus.MybatisConfiguration;
 import com.baomidou.mybatisplus.MybatisXMLLanguageDriver;
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
+import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
+import com.github.xm.common.constants.CommomConstants;
 import com.github.xm.common.interceptor.DataScopeInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -37,8 +39,7 @@ public class MyBatisConfig {
         sqlSessionFactory.setConfiguration(configuration);
         sqlSessionFactory.setPlugins(new Interceptor[]{
                 new PaginationInterceptor(),
-                new DataScopeInterceptor()
-
+                new DataScopeInterceptor(),
         });
 
         Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/*.xml");
@@ -70,7 +71,9 @@ public class MyBatisConfig {
      */
     @Bean
     public GlobalConfiguration globalConfiguration() {
-        GlobalConfiguration conf = new GlobalConfiguration();
+        GlobalConfiguration conf = new GlobalConfiguration(new LogicSqlInjector());
+        conf.setLogicDeleteValue(CommomConstants.DELETE);
+        conf.setLogicNotDeleteValue(CommomConstants.NORMAL);
         conf.setIdType(0);
         conf.setFieldStrategy(1);
         conf.setDbColumnUnderline(true);

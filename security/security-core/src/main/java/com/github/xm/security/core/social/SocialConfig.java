@@ -1,6 +1,7 @@
 package com.github.xm.security.core.social;
 
 import com.github.xm.common.util.UserUtil;
+import com.github.xm.security.core.authentication.handler.DogAuthenticationSuccessHandler;
 import com.github.xm.security.core.properties.DogSecurityProperties;
 import com.github.xm.security.core.social.support.DogSpringSocialConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private ConnectionSignUp connectionSignUp;
 
     @Autowired
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
+    private DogAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     @Bean

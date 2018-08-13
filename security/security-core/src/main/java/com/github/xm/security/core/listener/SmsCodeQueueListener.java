@@ -1,4 +1,4 @@
-package com.github.xm.security.brower.listener;
+package com.github.xm.security.core.listener;
 
 import com.github.xm.security.core.constants.DogSecurityConstants;
 import com.github.xm.common.constants.MQQueueConstants;

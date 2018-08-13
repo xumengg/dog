@@ -3,6 +3,7 @@ package com.github.xm.common.util;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -42,5 +43,9 @@ public class Query<T> extends Page<T> {
          * 查询总记录数
          */
         this.setSearchCount(true);
+    }
+
+    public Query(){
+        this(Collections.EMPTY_MAP);
     }
 }
