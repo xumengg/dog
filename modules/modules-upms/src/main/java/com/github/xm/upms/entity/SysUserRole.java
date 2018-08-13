@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,7 @@ import java.io.Serializable;
  * @since 2018-07-15
  */
 @TableName("sys_user_role")
+@Data
 public class SysUserRole extends Model<SysUserRole> {
 
     private static final long serialVersionUID = 1L;
@@ -44,60 +47,8 @@ public class SysUserRole extends Model<SysUserRole> {
     @TableField("update_time")
     private Date updateTime;
 
-
-    public Integer getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     protected Serializable pkVal() {
         return this.userRoleId;
-    }
-
-    @Override
-    public String toString() {
-        return "SysUserRole{" +
-        ", userRoleId=" + userRoleId +
-        ", userId=" + userId +
-        ", roleId=" + roleId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

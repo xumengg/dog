@@ -1,11 +1,14 @@
 package com.github.xm.upms.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +20,7 @@ import java.io.Serializable;
  * @since 2018-07-15
  */
 @TableName("sys_menu")
+@Data
 public class SysMenu extends Model<SysMenu> {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +74,7 @@ public class SysMenu extends Model<SysMenu> {
     /**
      * 0:正常 1:删除
      */
+    @TableLogic
     @TableField("del_flag")
     private String delFlag;
     /**
@@ -83,141 +88,8 @@ public class SysMenu extends Model<SysMenu> {
     @TableField("update_time")
     private Date updateTime;
 
-
-    public Integer getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getComponent() {
-        return component;
-    }
-
-    public void setComponent(String component) {
-        this.component = component;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     protected Serializable pkVal() {
         return this.menuId;
-    }
-
-    @Override
-    public String toString() {
-        return "SysMenu{" +
-        ", menuId=" + menuId +
-        ", name=" + name +
-        ", permission=" + permission +
-        ", path=" + path +
-        ", url=" + url +
-        ", method=" + method +
-        ", parentId=" + parentId +
-        ", icon=" + icon +
-        ", component=" + component +
-        ", sort=" + sort +
-        ", type=" + type +
-        ", delFlag=" + delFlag +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }
